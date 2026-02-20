@@ -8,8 +8,6 @@ from models import db, User, Opportunity, create_admin_if_not_exists
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'mysecretkey'
 
-os.makedirs('instance', exist_ok=True)
-
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///rad_portal.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -241,4 +239,5 @@ def delete_opportunity(opportunity_id):
 
 # Application entry point
 if __name__ == '__main__':
+
     app.run(debug=True)
