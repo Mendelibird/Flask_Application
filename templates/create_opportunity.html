@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="mb-4">Submit a New Opportunity</h2>
+
+<div class="card bg-dark text-white border-secondary shadow">
+    <div class="card-body">
+
+        <form method="post">
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Opportunity Title *</label>
+                <input type="text" class="form-control bg-secondary text-white border-0"
+                       name="title" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Description *</label>
+                <textarea class="form-control bg-secondary text-white border-0"
+                          name="description" rows="3" required></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Business Unit *</label>
+                <input type="text" class="form-control bg-secondary text-white border-0"
+                       name="business_unit" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Predicted Benefits *</label>
+                <textarea class="form-control bg-secondary text-white border-0"
+                          name="predicted_benefits" rows="3" required></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Business Criticality *</label>
+                <select class="form-select bg-secondary text-white border-0"
+                        name="business_criticality" required>
+                    <option value="">-- Select --</option>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                    <option value="Critical">Critical</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-danger px-4">Submit</button>
+            <a href="{{ url_for('home') }}" class="btn btn-secondary ms-2">Cancel</a>
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

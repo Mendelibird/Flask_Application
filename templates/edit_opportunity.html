@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="mb-4">Edit Opportunity</h2>
+
+<div class="card bg-dark text-white border-secondary shadow">
+    <div class="card-body">
+
+        <form method="post">
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Opportunity Title *</label>
+                <input type="text" class="form-control bg-secondary text-white border-0"
+                       name="title" value="{{ opportunity.title }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Description *</label>
+                <textarea class="form-control bg-secondary text-white border-0"
+                          name="description" rows="4" required>{{ opportunity.description }}</textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Business Unit *</label>
+                <input type="text" class="form-control bg-secondary text-white border-0"
+                       name="business_unit" value="{{ opportunity.business_unit }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Predicted Benefits *</label>
+                <textarea class="form-control bg-secondary text-white border-0"
+                          name="predicted_benefits" rows="3" required>{{ opportunity.predicted_benefits }}</textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Business Criticality *</label>
+                <select class="form-select bg-secondary text-white border-0"
+                        name="business_criticality" required>
+                    {% set c = opportunity.business_criticality %}
+                    <option value="Low"      {{ 'selected' if c == 'Low' }}>Low</option>
+                    <option value="Medium"   {{ 'selected' if c == 'Medium' }}>Medium</option>
+                    <option value="High"     {{ 'selected' if c == 'High' }}>High</option>
+                    <option value="Critical"     {{ 'selected' if c == 'Critical' }}>Critical</option>
+                </select>
+            </div>
+
+            {% if current_user.role == 'admin' %}
+            <hr class="border-secondary my-4">
+
+            <h4 class="fw-bold mb-3">Admin Options</h4>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Status</label>
+                <select class="form-select bg-secondary text-white border-0"
+                        name="status">
+                    {% set s = opportunity.status %}
+                    <option value="New"                  {{ 'selected' if s == 'New' }}>New</option>
+                    <option value="Under Review"         {{ 'selected' if s == 'Under Review' }}>Under Review</option>
+                    <option value="Qualified"            {{ 'selected' if s == 'Qualified' }}>Qualified</option>
+                    <option value="Failed Qualification" {{ 'selected' if s == 'Failed Qualification' }}>Failed Qualification</option>
+                    <option value="In Discovery"         {{ 'selected' if s == 'In Discovery' }}>In Discovery</option>
+                    <option value="Build"                {{ 'selected' if s == 'Build' }}>Build</option>
+                    <option value="Test"                 {{ 'selected' if s == 'Test' }}>Test</option>
+                    <option value="Delivered"            {{ 'selected' if s == 'Delivered' }}>Delivered</option>
+                    <option value="On Pause"             {{ 'selected' if s == 'On Pause' }}>On Pause</option>
+                    <option value="Cancelled"            {{ 'selected' if s == 'Cancelled' }}>Cancelled</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Value Score (1–100)</label>
+                <input type="number" class="form-control bg-secondary text-white border-0"
+                       name="value_score" min="1" max="100"
+                       value="{{ opportunity.value_score or '' }}">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Effort Score (1–100)</label>
+                <input type="number" class="form-control bg-secondary text-white border-0"
+                       name="effort_score" min="1" max="100"
+                       value="{{ opportunity.effort_score or '' }}">
+            </div>
+            {% endif %}
+
+            <div class="mt-4">
+                <button type="submit" class="btn btn-danger px-4">Save Changes</button>
+                <a href="{{ url_for('home') }}" class="btn btn-secondary ms-2">Cancel</a>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}
